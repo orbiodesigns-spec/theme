@@ -70,6 +70,25 @@ async function initDb() {
 // Call on startup
 initDb();
 
+// --- HEALTH CHECK ---
+app.get('/api/health', async (req, res) => {
+    try {
+        const [result] = await db.query('SELECT 1');
+        res.json({
+            status: 'healthy',
+            database: 'connected',
+            message: 'Server and database are running properly'
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: 'unhealthy',
+            database: 'disconnected',
+            error: err.message,
+            message: 'Database connection failed. Check your .env configuration.'
+        });
+    }
+});
+
 // --- ROUTES ---
 
 // 21. GET LAYOUTS (Public)
