@@ -389,7 +389,6 @@ app.post('/api/public/heartbeat', async (req, res) => {
     }
 });
 
-// --- PAYMENT ROUTES (Cashfree) ---
 // --- PAYMENT ROUTES (Razorpay) ---
 const Razorpay = require('razorpay');
 
